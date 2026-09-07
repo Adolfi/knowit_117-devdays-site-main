@@ -3,7 +3,7 @@ import { site } from '../config/site';
 ---
 
 <section id="top" class="hero">
-  <!-- The animated "entangled" field is a global fixed background rendered in
+  <!-- The animated paired particle field is a global fixed background rendered in
        BaseLayout; the hero just lays a soft glass veil over it for legibility. -->
   <div class="hero__glass" aria-hidden="true"></div>
 
@@ -64,9 +64,7 @@ import { site } from '../config/site';
     position: absolute;
     inset: 0;
     z-index: -1;
-    /* Very light blur so the particles stay crisp, plus a scrim behind copy. */
-    backdrop-filter: blur(2px) saturate(115%);
-    -webkit-backdrop-filter: blur(2px) saturate(115%);
+    /* Preserve the fine particle texture; the local scrim protects the copy. */
     background-image:
       linear-gradient(180deg, var(--glass-sheen), transparent 24%),
       radial-gradient(120% 90% at 18% 50%, var(--glass-bg) 0%, transparent 68%);
@@ -130,7 +128,7 @@ import { site } from '../config/site';
     margin-bottom: 0.4em;
   }
 
-  /* Animated gradient text — same colors as the blobs, but the gradient
+  /* Animated gradient text — brand accent colors, but the gradient
      sweeps in the opposite horizontal direction so it feels alive. */
   .hero__accent {
     background: linear-gradient(
@@ -149,8 +147,7 @@ import { site } from '../config/site';
     animation: sweep 7s linear infinite;
   }
 
-  /* Background blobs drift generally rightward/downward (positive x);
-     this sweeps the text gradient the other way — opposite motion. */
+  /* A slow colour sweep adds a colour accent to the monochrome field. */
   @keyframes sweep {
     from {
       background-position: 0% 50%;
@@ -228,8 +225,8 @@ import { site } from '../config/site';
     margin-top: 0.5rem;
   }
 
-  /* Respect users who prefer less motion: the canvas script bails out entirely
-     for these users, so the CSS fallback gradient (two colour pools) is shown.
+  /* Respect users who prefer less motion: the canvas holds a still composition
+     for these users, over the CSS colour pools.
      Just stop the remaining decorative text animations. */
   @media (prefers-reduced-motion: reduce) {
     .hero__accent,

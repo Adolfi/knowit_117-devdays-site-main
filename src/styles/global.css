@@ -41,6 +41,13 @@
 
   /* Aurora orb (hero background) */
   --orb-glow: rgba(124, 77, 255, 0.25);
+  --field-silver: #d9dce5;
+  --field-violet: #b9abc8;
+  --field-blue: #a4bccb;
+  --field-rose-pool: rgba(255, 51, 102, 0.025);
+  --field-violet-pool: rgba(124, 77, 255, 0.04);
+  --field-blue-pool: rgba(88, 166, 255, 0.025);
+  --field-opacity: 0.85;
 
   /* Typography — terminal/monospace aesthetic across the whole site. */
   --font-sans: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, 'SF Mono', Menlo,
@@ -87,6 +94,13 @@
 
   /* Aurora orb — softer glow, brighter sheen on the white surface. */
   --orb-glow: rgba(255, 61, 139, 0.18);
+  --field-silver: #505865;
+  --field-violet: #776780;
+  --field-blue: #577485;
+  --field-rose-pool: rgba(255, 51, 102, 0.045);
+  --field-violet-pool: rgba(124, 77, 255, 0.065);
+  --field-blue-pool: rgba(88, 166, 255, 0.045);
+  --field-opacity: 0.65;
 
   --shadow: 0 8px 30px rgba(140, 149, 159, 0.25);
 }
