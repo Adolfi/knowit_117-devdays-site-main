@@ -1,0 +1,242 @@
+---
+import { site } from '../config/site';
+---
+
+<section id="top" class="hero">
+  <!-- The animated "entangled" field is a global fixed background rendered in
+       BaseLayout; the hero just lays a soft glass veil over it for legibility. -->
+  <div class="hero__glass" aria-hidden="true"></div>
+
+  <div class="container hero__inner">
+    <p class="eyebrow">
+      {site.ui.hero.hostedByPrefix}
+      <a
+        class="host-link"
+        href={site.hostUrl}
+        target="_blank"
+        rel="noopener"
+      >
+        {site.host}<span class="host-link__line" aria-hidden="true"></span>
+      </a>
+      · {site.city}
+    </p>
+    <h1 class="hero__title">
+      <span class="hero__title-lead" set:html={site.ui.hero.titleLead.replace(/ /g, '&nbsp;')} /> <span class="hero__accent">{site.wordmark}</span>
+    </h1>
+    <p class="lead hero__lead">
+      {
+        site.tagline.split(/(event)/i).map((seg) =>
+          seg.toLowerCase() === 'event' ? <span class="term-word">{seg}</span> : seg
+        )
+      }
+    </p>
+
+    <ul class="hero__facts" aria-label="Event facts">
+      <li><span class="hero__facts-k">{site.ui.hero.facts.when}</span>{site.date}</li>
+      <li><span class="hero__facts-k">{site.ui.hero.facts.time}</span>{site.time}</li>
+      <li><span class="hero__facts-k">{site.ui.hero.facts.where}</span>{site.city}</li>
+      <li><span class="hero__facts-k">{site.ui.hero.facts.price}</span>{site.price}</li>
+    </ul>
+
+    <div class="hero__cta">
+      <a href="#register" class="btn btn--primary">{site.ui.hero.ctaPrimary}</a>
+      <a href="#agenda" class="btn btn--ghost">{site.ui.hero.ctaSecondary}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    /* Full first view, minus the sticky 4rem header */
+    min-height: calc(100svh - 4rem);
+    padding-block: clamp(2.5rem, 8vw, 5rem);
+    border-bottom: 1px solid var(--border-muted);
+    scroll-snap-align: start;
+  }
+
+  /* --- Frosted glass veil over the canvas (keeps text readable) --- */
+  .hero__glass {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    /* Very light blur so the particles stay crisp, plus a scrim behind copy. */
+    backdrop-filter: blur(2px) saturate(115%);
+    -webkit-backdrop-filter: blur(2px) saturate(115%);
+    background-image:
+      linear-gradient(180deg, var(--glass-sheen), transparent 24%),
+      radial-gradient(120% 90% at 18% 50%, var(--glass-bg) 0%, transparent 68%);
+  }
+
+  .hero__inner {
+    position: relative;
+  }
+
+  /* "Knowit Experience" link with an animated moving underline to invite clicks. */
+  .host-link {
+    position: relative;
+    color: var(--accent-text);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .host-link:hover {
+    text-decoration: none;
+  }
+
+  .host-link__line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 2px;
+    border-radius: 2px;
+    /* A shimmering segment that sweeps left→right along the underline. */
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--accent) 20%,
+      var(--accent-2) 50%,
+      var(--link) 80%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    opacity: 0.85;
+    animation: host-line 2.6s linear infinite;
+  }
+
+  .host-link:hover .host-link__line,
+  .host-link:focus-visible .host-link__line {
+    opacity: 1;
+    height: 3px;
+    animation-duration: 1.4s;
+  }
+
+  @keyframes host-line {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+
+  .hero__title {
+    margin-bottom: 0.4em;
+  }
+
+  /* Animated gradient text — same colors as the blobs, but the gradient
+     sweeps in the opposite horizontal direction so it feels alive. */
+  .hero__accent {
+    background: linear-gradient(
+      90deg,
+      var(--accent),
+      var(--accent-2),
+      var(--link),
+      var(--accent-2),
+      var(--accent)
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    white-space: nowrap;
+    animation: sweep 7s linear infinite;
+  }
+
+  /* Background blobs drift generally rightward/downward (positive x);
+     this sweeps the text gradient the other way — opposite motion. */
+  @keyframes sweep {
+    from {
+      background-position: 0% 50%;
+    }
+    to {
+      background-position: 300% 50%;
+    }
+  }
+
+  .hero__lead {
+    font-size: 1.3rem;
+    color: var(--text);
+  }
+
+  /* "event" styled as a terminal token, with a blinking caret. */
+  .term-word {
+    font-family: var(--font-mono);
+    color: var(--term-color);
+    background: color-mix(in srgb, var(--accent-2) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent-2) 35%, transparent);
+    border-radius: 6px;
+    padding: 0.05em 0.35em;
+  }
+
+  .term-word::after {
+    content: '';
+    display: inline-block;
+    width: 0.55em;
+    height: 1.05em;
+    margin-left: 0.15em;
+    vertical-align: -0.15em;
+    background: var(--accent);
+    animation: caret-blink 1.1s steps(1) infinite;
+  }
+
+  @keyframes caret-blink {
+    0%,
+    50% {
+      opacity: 1;
+    }
+    50.01%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .hero__facts {
+    list-style: none;
+    padding: 0;
+    margin: 1.75rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
+  }
+
+  .hero__facts li {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+  }
+
+  .hero__facts-k {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+    font-weight: 500;
+  }
+
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  /* Respect users who prefer less motion: the canvas script bails out entirely
+     for these users, so the CSS fallback gradient (two colour pools) is shown.
+     Just stop the remaining decorative text animations. */
+  @media (prefers-reduced-motion: reduce) {
+    .hero__accent,
+    .host-link__line,
+    .term-word::after {
+      animation: none !important;
+    }
+  }
+</style>
+

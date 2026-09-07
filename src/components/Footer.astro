@@ -1,0 +1,76 @@
+---
+import { site } from '../config/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div>
+      <p class="site-footer__brand">
+        <span class="site-footer__spark" aria-hidden="true">◆</span> {site.name}
+      </p>
+      <p class="site-footer__muted">{site.ui.footer.hostedByPrefix} {site.host} · {site.city}</p>
+    </div>
+    <div class="site-footer__links">
+      <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+      <a href={site.codeOfConductUrl} target="_blank" rel="noopener">{site.ui.footer.codeOfConduct}</a>
+      <a href="#register">{site.ui.footer.registerLabel}</a>
+      <a href="#top">{site.ui.footer.backToTop}</a>
+    </div>
+  </div>
+  <div class="container site-footer__legal">
+    <p class="site-footer__muted">
+      © {year} {site.host}. {site.ui.footer.trademark}
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border-muted);
+    background: var(--bg-subtle);
+    padding-block: 2.5rem 1.5rem;
+    scroll-snap-align: end;
+  }
+
+  .site-footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .site-footer__brand {
+    font-weight: 700;
+    margin: 0 0 0.25rem;
+  }
+
+  .site-footer__spark {
+    color: var(--accent);
+  }
+
+  .site-footer__muted {
+    color: var(--text-faint);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .site-footer__links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: flex-start;
+  }
+
+  .site-footer__links a {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .site-footer__legal {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-muted);
+  }
+</style>

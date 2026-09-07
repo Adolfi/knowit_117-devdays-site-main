@@ -1,0 +1,97 @@
+---
+import { site } from '../config/site';
+import RegisterCta from './RegisterCta.astro';
+const { venue } = site;
+const mapsQuery = encodeURIComponent(`${venue.name}, ${venue.address}, ${venue.city}`);
+// Google Maps directions link (opens the app / maps.google.com).
+const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+// Free, keyless embed. Use the postal address (not raw lat/lng) — the classic
+// `output=embed` treats `q=lat,lng` as a place-id string and renders a broken
+// map, whereas an address geocodes correctly.
+const embedQuery = encodeURIComponent(`${venue.address}, ${venue.city}`);
+const embedUrl = `https://maps.google.com/maps?q=${embedQuery}&z=15&output=embed`;
+---
+
+<section id="venue" class="section section--alt">
+  <div class="container venue">
+    <div>
+      <p class="eyebrow">{site.ui.venue.eyebrow}</p>
+      <h2>{site.ui.venue.heading}</h2>
+      <p class="venue__name">{venue.name}</p>
+      <p class="venue__addr">
+        {venue.address}<br />
+        {venue.city}
+      </p>
+      <p class="lead venue__note">{venue.note}</p>
+      <RegisterCta />
+    </div>
+    <div class="venue__mapwrap">
+      <iframe
+        class="venue__map card"
+        src={embedUrl}
+        title={`Google Map showing ${venue.name}, ${venue.address}`}
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen></iframe>
+      <a class="venue__directions" href={mapsUrl} target="_blank" rel="noopener">
+        {site.ui.venue.directions}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .venue {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  @media (min-width: 780px) {
+    .venue {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .venue__name {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .venue__addr {
+    color: var(--text-muted);
+  }
+
+  .venue__mapwrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .venue__map {
+    width: 100%;
+    min-height: 320px;
+    border: 1px solid var(--border);
+    padding: 0;
+    overflow: hidden;
+    /* In dark mode, nudge the light Google embed to sit better with the theme. */
+    filter: brightness(var(--map-brightness, 1));
+  }
+
+  :global(:root:not([data-theme='light'])) .venue__map {
+    --map-brightness: 0.9;
+  }
+
+  .venue__directions {
+    align-self: flex-start;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .venue__directions:hover {
+    color: var(--accent-text);
+    text-decoration: none;
+  }
+</style>

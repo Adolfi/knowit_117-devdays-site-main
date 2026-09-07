@@ -1,0 +1,51 @@
+---
+import { site } from '../config/site';
+import RegisterCta from './RegisterCta.astro';
+---
+
+<section id="about" class="section">
+  <div class="container">
+    <p class="eyebrow">{site.ui.about.eyebrow}</p>
+    <h2>{site.ui.about.heading}</h2>
+    <p class="lead">{site.intro}</p>
+    <p class="about__lang">🇸🇪 {site.ui.about.languageNote}</p>
+
+    <div class="grid grid--2 highlights">
+      {
+        site.highlights.map((h) => (
+          <div class="card">
+            <h3>{h.title}</h3>
+            <p class="highlights__desc">{h.description}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <RegisterCta />
+  </div>
+</section>
+
+<style>
+  .highlights {
+    margin-top: 2rem;
+  }
+
+  .about__lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding: 0.5rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background: var(--surface, transparent);
+  }
+
+  .highlights__desc {
+    color: var(--text-muted);
+    margin: 0;
+  }
+</style>

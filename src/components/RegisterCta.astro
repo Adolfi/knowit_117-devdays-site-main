@@ -1,0 +1,53 @@
+---
+// Small inline call-to-action linking to the Register section.
+// Dropped at the end of content sections so registering is always one click away.
+import { site } from '../config/site';
+interface Props {
+  label?: string;
+}
+const { label = site.ui.cta.registerLabel } = Astro.props;
+---
+
+<a class="reg-cta" href="#register">
+  <span>{label}</span>
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+    <path
+      d="M5 12h14M13 6l6 6-6 6"
+      stroke="currentColor"
+      stroke-width="2.2"
+      stroke-linecap="round"
+      stroke-linejoin="round"></path>
+  </svg>
+</a>
+
+<style>
+  .reg-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.75rem;
+    font-weight: 650;
+    color: var(--text);
+  }
+
+  .reg-cta:hover {
+    text-decoration: none;
+    color: var(--accent-text);
+  }
+
+  .reg-cta svg {
+    transition: transform 0.2s ease;
+  }
+
+  .reg-cta:hover svg {
+    transform: translateX(4px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reg-cta svg,
+    .reg-cta:hover svg {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>

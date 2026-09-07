@@ -1,0 +1,183 @@
+---
+import { site } from '../config/site';
+import ThemeToggle from './ThemeToggle.astro';
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="#top" class="wordmark">
+      <span class="wordmark__spark" aria-hidden="true">◆</span>
+      <span class="wordmark__name">{site.wordmark}</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <div id="primary-nav" class="nav__links">
+        <a href="#about">{site.ui.nav.about}</a>
+        <a href="#agenda">{site.ui.nav.agenda}</a>
+        <a href="#speakers">{site.ui.nav.speakers}</a>
+        <a href="#venue">{site.ui.nav.venue}</a>
+        <a href="#register" class="nav__cta">{site.ui.nav.register}</a>
+      </div>
+      <ThemeToggle />
+      <button
+        type="button"
+        class="nav__toggle"
+        aria-controls="primary-nav"
+        aria-expanded="false"
+        aria-label="Open menu"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    var btn = document.querySelector('.nav__toggle');
+    var panel = document.getElementById('primary-nav');
+    if (!btn || !panel) return;
+    function close() {
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Open menu');
+      panel.classList.remove('is-open');
+    }
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      btn.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+      panel.classList.toggle('is-open', !open);
+    });
+    panel.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', close);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') close();
+    });
+  })();
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--header-bg);
+    backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid var(--border-muted);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+  }
+
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  .wordmark:hover {
+    text-decoration: none;
+  }
+
+  .wordmark__spark {
+    color: var(--accent);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .nav a {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .nav a:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav__cta {
+    color: var(--text) !important;
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.9rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .nav__cta:hover {
+    border-color: var(--accent);
+  }
+
+  .nav__toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+
+  .nav__toggle:hover {
+    border-color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .nav__toggle {
+      display: inline-flex;
+    }
+
+    .nav__links {
+      position: absolute;
+      top: 4rem;
+      left: 0;
+      right: 0;
+      z-index: 60;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.25rem;
+      padding: 0.5rem 1rem 1rem;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border-muted);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+      display: none;
+    }
+
+    .nav__links.is-open {
+      display: flex;
+    }
+
+    .nav__links a {
+      padding: 0.75rem 0.25rem;
+      font-size: 1.05rem;
+    }
+
+    .nav__cta {
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+  }
+</style>

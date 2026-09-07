@@ -1,0 +1,31 @@
+# GitHub Copilot DevDays
+
+> An informal evening event for developers, hosted by Knowit Experience in
+> Gothenburg. Three short talks — including one from GitHub — on building with
+> GitHub Copilot, followed by drinks and conversation. Free to attend, ~17:00–19:00.
+
+Key facts:
+
+- Host: Knowit Experience (https://www.knowit.se/om-knowit/experience/)
+- City: Gothenburg, Sweden
+- Venue: Vikingsgatan 3, 411 04 Göteborg
+- Time: 17:00 – 19:00
+- Price: Free
+- Format: 3 speakers (one from GitHub), then mingle
+
+## Event
+
+- [Registration (Luma)](https://luma.com/mawlp9c7): Reserve a spot for GitHub Copilot DevDays.
+- [About the event](/#about): What to expect from the evening.
+- [Agenda](/#agenda): Talk schedule for the evening.
+- [Speakers](/#speakers): The three speakers, including a guest from GitHub.
+- [Venue](/#venue): Location and directions to Vikingsgatan 3, Göteborg.
+
+## About the host
+
+- [Knowit Experience](https://www.knowit.se/om-knowit/experience/): The digital agency hosting DevDays.
+
+## Notes
+
+Not affiliated with GitHub, Inc. "GitHub" and "Copilot" are trademarks of their
+respective owners.

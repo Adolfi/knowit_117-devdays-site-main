@@ -1,0 +1,163 @@
+---
+import { site, lumaUrl, lumaEmbedUrl, lumaConfigured } from '../config/site';
+
+const configured = lumaConfigured();
+const publicUrl = lumaUrl();
+const embedUrl = lumaEmbedUrl();
+---
+
+<section id="register" class="section register">
+  <div class="container register__inner">
+    <p class="eyebrow">{site.ui.register.eyebrow}</p>
+    <h2>{site.ui.register.heading}</h2>
+    <p class="lead register__lead">{site.ui.register.lead}</p>
+
+    {
+      configured ? (
+        <div class="register__widget">
+          {/*
+            Click-to-load facade: the Luma iframe sets third-party (Cloudflare)
+            cookies, which Lighthouse flags. We only load it on user intent, so
+            the page loads with zero third-party requests/cookies. Registration
+            is still one click away inline, plus a direct link to Luma.
+          */}
+          <div class="card register__facade" id="register-facade" data-embed={embedUrl}>
+            <div class="register__facade-inner">
+              <span class="register__facade-badge" aria-hidden="true">{site.ui.register.facadeBadge}</span>
+              <h3>{site.ui.register.facadeHeading}</h3>
+              <p>{site.ui.register.facadeBody}</p>
+              <div class="register__facade-actions">
+                <button type="button" class="btn btn--primary" id="register-load">
+                  {site.ui.register.facadeLoad}
+                </button>
+                {publicUrl && (
+                  <a class="btn btn--ghost" href={publicUrl} target="_blank" rel="noopener">
+                    {site.ui.register.facadeOpen}
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+          <template id="register-embed-tpl">
+            <iframe
+              class="register__embed card"
+              src={embedUrl}
+              title={`Register for ${site.name} on Luma`}
+              loading="lazy"
+              allow="fullscreen; payment"
+              aria-label="Event registration form"
+            />
+          </template>
+          {publicUrl && (
+            <p class="register__fallback">
+              {site.ui.register.fallbackPrefix}{' '}
+              <a href={publicUrl} target="_blank" rel="noopener">
+                {site.ui.register.fallbackLink}
+              </a>
+            </p>
+          )}
+        </div>
+      ) : (
+        <div class="card register__soon">
+          <h3>{site.ui.register.soonHeading}</h3>
+          <p>
+            {site.ui.register.soonBody}{' '}
+            <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.
+          </p>
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var btn = document.getElementById('register-load');
+    var facade = document.getElementById('register-facade');
+    var tpl = document.getElementById('register-embed-tpl');
+    if (!btn || !facade || !tpl) return;
+    btn.addEventListener('click', function () {
+      var frame = tpl.content.firstElementChild.cloneNode(true);
+      facade.replaceWith(frame);
+    });
+  })();
+</script>
+
+<style>
+  .register {
+    text-align: center;
+  }
+
+  .register__inner {
+    max-width: 640px;
+  }
+
+  .register__lead {
+    margin-inline: auto;
+  }
+
+  .register__widget {
+    margin-top: 1.5rem;
+  }
+
+  .register__facade {
+    padding: 2.5rem 1.5rem;
+    background: var(--bg-elevated);
+    text-align: center;
+  }
+
+  .register__facade-inner {
+    max-width: 420px;
+    margin-inline: auto;
+  }
+
+  .register__facade-badge {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .register__facade h3 {
+    margin: 0 0 0.5rem;
+  }
+
+  .register__facade p {
+    color: var(--text-muted);
+    margin: 0 0 1.5rem;
+  }
+
+  .register__facade-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  .register__embed {
+    width: 100%;
+    min-height: 640px;
+    padding: 0;
+    overflow: hidden;
+    background: var(--bg-elevated);
+  }
+
+  .register__fallback {
+    margin-top: 1rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .register__soon {
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .register__soon h3 {
+    margin-top: 0;
+  }
+
+  .register__soon p {
+    color: var(--text-muted);
+    margin: 0;
+  }
+</style>

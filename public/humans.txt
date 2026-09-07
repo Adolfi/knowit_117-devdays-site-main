@@ -1,0 +1,19 @@
+/* TEAM */
+
+Host: Knowit Experience
+Site: https://www.knowit.se/om-knowit/experience/
+Location: Gothenburg, Sweden
+
+/* SITE */
+
+Event: GitHub Copilot DevDays
+Tagline: An event for developers, hosted by Knowit Experience.
+Venue: Vikingsgatan 3, 411 04 Göteborg
+Standards: HTML5, CSS3, Astro
+Components: Astro, JetBrains Mono, Leaflet-free Google Maps embed, Luma
+Software: Astro (static site generator)
+
+/* NOTE */
+
+Not affiliated with GitHub, Inc. "GitHub" and "Copilot" are trademarks of
+their respective owners.
