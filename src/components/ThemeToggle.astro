@@ -71,7 +71,7 @@
     display: none;
   }
 
-  /* Show the sun in dark mode (default), the moon in light mode.
+  /* Show the sun in dark mode, the moon in light mode (default).
      Using :root ancestor selectors keeps these more specific than the base rule. */
   :global(:root:not([data-theme='light'])) .theme-toggle__sun {
     display: block;
