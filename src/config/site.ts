@@ -9,6 +9,7 @@
 import fredrikPhoto from '../assets/speakers/fredrik-skogman.png';
 import andreasPhoto from '../assets/speakers/andreas-heige.png';
 import victorPhoto from '../assets/speakers/victor-svensson.png';
+import asaPhoto from '../assets/speakers/asa-abrahamsson.png';
 
 export interface AgendaItem {
   time: string;
@@ -23,18 +24,23 @@ export interface Talk {
   description: string;
 }
 
-export interface Speaker {
+export interface Person {
   name: string;
   role: string;
   /** Short bio line. */
   bio?: string;
-  /** The talk this speaker is giving. */
-  talk?: Talk;
   /** Optimised portrait (processed by astro:assets). */
   photo?: ImageMetadata;
   /** Social profiles (shown as icons at the bottom of the card). */
   linkedin?: string;
   github?: string;
+}
+
+export interface Speaker extends Person {
+  /** The talk this speaker (or these speakers, see `coSpeakers`) is giving. */
+  talk?: Talk;
+  /** Additional speaker(s) co-presenting this same talk, shown in one card. */
+  coSpeakers?: Person[];
 }
 
 export const site = {
@@ -111,7 +117,7 @@ export const site = {
       time: '17:00',
       title: 'Talk 2 — AI and the OWASP Top 10',
       description:
-        'Victor Svensson (Knowit Experience) on securing AI through the lens of the OWASP Top 10.',
+        'Victor Svensson and Åsa Abrahamsson (Knowit Experience) on securing AI through the lens of the OWASP Top 10.',
     },
     {
       time: '17:45',
@@ -132,7 +138,7 @@ export const site = {
       name: 'Fredrik Skogman',
       role: 'GitHub',
       photo: fredrikPhoto,
-      bio: 'Joining us straight from GitHub.',
+      bio: 'Supply chain security at GitHub.',
       linkedin: 'https://www.linkedin.com/in/skogman/',
       github: 'https://github.com/kommendorkapten',
       talk: {
@@ -147,6 +153,15 @@ export const site = {
       photo: victorPhoto,
       bio: 'Security Architect at Knowit Experience.',
       linkedin: 'https://www.linkedin.com/in/victor-svensson-472059155/',
+      coSpeakers: [
+        {
+          name: 'Åsa Abrahamsson',
+          role: 'Knowit Experience',
+          bio: 'Fullstack Developer, AI Advisor at Knowit Experience.',
+          photo: asaPhoto,
+          linkedin: 'https://www.linkedin.com/in/asaabrahamsson/',
+        },
+      ],
       talk: {
         title: 'AI and the OWASP Top 10',
         description:
@@ -224,7 +239,7 @@ export const site = {
     speakers: {
       eyebrow: 'Who you’ll hear from',
       heading: 'Speakers',
-      lead: 'Three speakers — including a guest straight from GitHub.',
+      lead: 'Four speakers — including a guest straight from GitHub.',
       talkLabel: 'Talk',
     },
     venue: {
