@@ -10,6 +10,7 @@ import fredrikPhoto from '../assets/speakers/fredrik-skogman.png';
 import andreasPhoto from '../assets/speakers/andreas-heige.png';
 import victorPhoto from '../assets/speakers/victor-svensson.png';
 import asaPhoto from '../assets/speakers/asa-abrahamsson.png';
+import dennisPhoto from '../assets/speakers/dennis-adolfi.png';
 
 export interface AgendaItem {
   time: string;
@@ -24,23 +25,18 @@ export interface Talk {
   description: string;
 }
 
-export interface Person {
+export interface Speaker {
   name: string;
   role: string;
   /** Short bio line. */
   bio?: string;
+  /** The talk this speaker is giving. */
+  talk?: Talk;
   /** Optimised portrait (processed by astro:assets). */
   photo?: ImageMetadata;
   /** Social profiles (shown as icons at the bottom of the card). */
   linkedin?: string;
   github?: string;
-}
-
-export interface Speaker extends Person {
-  /** The talk this speaker (or these speakers, see `coSpeakers`) is giving. */
-  talk?: Talk;
-  /** Additional speaker(s) co-presenting this same talk, shown in one card. */
-  coSpeakers?: Person[];
 }
 
 export const site = {
@@ -109,15 +105,15 @@ export const site = {
     },
     {
       time: '16:15',
-      title: 'Talk 1 — Taming the agentic harness',
+      title: 'Talk 1 — AI and the OWASP Top 10',
       description:
-        'Andreas Heige (Knowit Experience) on setting up agentic workflows and getting the most out of GitHub Copilot.',
+        'Victor Svensson and Åsa Abrahamsson (Knowit Experience) on securing AI through the lens of the OWASP Top 10.',
     },
     {
       time: '17:00',
-      title: 'Talk 2 — AI and the OWASP Top 10',
+      title: 'Talk 2 — Taming the agentic harness',
       description:
-        'Victor Svensson and Åsa Abrahamsson (Knowit Experience) on securing AI through the lens of the OWASP Top 10.',
+        'Andreas Heige (Knowit Experience) on setting up agentic workflows and getting the most out of GitHub Copilot.',
     },
     {
       time: '17:45',
@@ -132,19 +128,31 @@ export const site = {
     },
   ] as AgendaItem[],
 
-  // --- Speakers ---
+  // --- Speakers (row 1: Dennis, Åsa, Victor) ---
   speakers: [
     {
-      name: 'Fredrik Skogman',
-      role: 'GitHub',
-      photo: fredrikPhoto,
-      bio: 'Supply chain security at GitHub.',
-      linkedin: 'https://www.linkedin.com/in/skogman/',
-      github: 'https://github.com/kommendorkapten',
+      name: 'Dennis Adolfi',
+      role: 'Knowit Experience',
+      photo: dennisPhoto,
+      bio: 'Head of Technology at Knowit Experience.',
+      linkedin: 'https://www.linkedin.com/in/dennis-adolfi/',
+      github: 'https://github.com/adolfi',
       talk: {
-        title: 'New threats, new defences: security in the age of AI',
+        title: 'Keynote',
         description:
-          'The new security threats that have emerged, what’s been done to counter them, what’s next — and how AI has reshaped the whole landscape.',
+          'How GitHub Copilot has reshaped the way we work and our processes at Knowit Experience.',
+      },
+    },
+    {
+      name: 'Åsa Abrahamsson',
+      role: 'Knowit Experience',
+      photo: asaPhoto,
+      bio: 'Fullstack Developer, AI Advisor at Knowit Experience.',
+      linkedin: 'https://www.linkedin.com/in/asaabrahamsson/',
+      talk: {
+        title: 'AI and the OWASP Top 10',
+        description:
+          'A security lens on AI: walking the OWASP Top 10 with a focus on the risks AI introduces — and how to stay ahead of them.',
       },
     },
     {
@@ -153,15 +161,6 @@ export const site = {
       photo: victorPhoto,
       bio: 'Security Architect at Knowit Experience.',
       linkedin: 'https://www.linkedin.com/in/victor-svensson-472059155/',
-      coSpeakers: [
-        {
-          name: 'Åsa Abrahamsson',
-          role: 'Knowit Experience',
-          bio: 'Fullstack Developer, AI Advisor at Knowit Experience.',
-          photo: asaPhoto,
-          linkedin: 'https://www.linkedin.com/in/asaabrahamsson/',
-        },
-      ],
       talk: {
         title: 'AI and the OWASP Top 10',
         description:
@@ -179,6 +178,19 @@ export const site = {
         title: 'Taming the agentic harness',
         description:
           'How to set up and optimise an agentic workflow, with practical ways to get more out of GitHub Copilot every day.',
+      },
+    },
+    {
+      name: 'Fredrik Skogman',
+      role: 'GitHub',
+      photo: fredrikPhoto,
+      bio: 'Supply chain security at GitHub.',
+      linkedin: 'https://www.linkedin.com/in/skogman/',
+      github: 'https://github.com/kommendorkapten',
+      talk: {
+        title: 'New threats, new defences: security in the age of AI',
+        description:
+          'The new security threats that have emerged, what’s been done to counter them, what’s next — and how AI has reshaped the whole landscape.',
       },
     },
   ] as Speaker[],
@@ -239,7 +251,7 @@ export const site = {
     speakers: {
       eyebrow: 'Who you’ll hear from',
       heading: 'Speakers',
-      lead: 'Four speakers — including a guest straight from GitHub.',
+      lead: 'Five speakers — including a guest straight from GitHub.',
       talkLabel: 'Talk',
     },
     venue: {
