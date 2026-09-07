@@ -99,7 +99,6 @@ export const site = {
     {
       time: '16:00',
       title: 'Keynote',
-      speaker: { name: 'Dennis Adolfi', url: 'https://www.linkedin.com/in/dennis-adolfi/' },
       description:
         'Our keynote speaker, Dennis Adolfi (Head of Technology at Knowit Experience), opens the evening with how GitHub Copilot has reshaped the way we work and our processes at Knowit Experience.',
     },
