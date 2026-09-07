@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://copilot-devdays.example.com/sitemap-index.xml
+Sitemap: https://devdaygbg.se/sitemap-index.xml

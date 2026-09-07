@@ -6,9 +6,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   // The canonical production URL. Update this to your real domain when you deploy —
   // it drives the canonical link, Open Graph URL, sitemap and robots.txt.
-  site: 'https://knowit.github.io/knowit_117-devdays-site',
-  // Base path for GitHub Pages (serving from https://<owner>.github.io/<repo>/)
-  base: '/knowit_117-devdays-site/',
+  site: 'https://devdaygbg.se',
   integrations: [sitemap()],
   build: {
     // Inline all CSS into the HTML so there is no render-blocking stylesheet
