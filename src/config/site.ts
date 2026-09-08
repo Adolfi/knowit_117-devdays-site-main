@@ -39,6 +39,16 @@ export interface Speaker {
   github?: string;
 }
 
+// Shared by Åsa and Victor, who co-present this talk. The Speakers component
+// groups consecutive speakers into one card when they reference the same
+// `talk` object (===), so both profiles render together under one shared
+// Talk section instead of duplicating it per card.
+const owaspTalk: Talk = {
+  title: 'AI and the OWASP Top 10',
+  description:
+    'A security lens on AI: walking the OWASP Top 10 with a focus on the risks AI introduces — and how to stay ahead of them.',
+};
+
 export const site = {
   // --- Identity ---
   name: 'GitHub Copilot DevDays',
@@ -148,11 +158,7 @@ export const site = {
       photo: asaPhoto,
       bio: 'Fullstack Developer, AI Advisor at Knowit Experience.',
       linkedin: 'https://www.linkedin.com/in/asaabrahamsson/',
-      talk: {
-        title: 'AI and the OWASP Top 10',
-        description:
-          'A security lens on AI: walking the OWASP Top 10 with a focus on the risks AI introduces — and how to stay ahead of them.',
-      },
+      talk: owaspTalk,
     },
     {
       name: 'Victor Svensson',
@@ -160,11 +166,7 @@ export const site = {
       photo: victorPhoto,
       bio: 'Security Architect at Knowit Experience.',
       linkedin: 'https://www.linkedin.com/in/victor-svensson-472059155/',
-      talk: {
-        title: 'AI and the OWASP Top 10',
-        description:
-          'A security lens on AI: walking the OWASP Top 10 with a focus on the risks AI introduces — and how to stay ahead of them.',
-      },
+      talk: owaspTalk,
     },
     {
       name: 'Andreas Heige',
