@@ -114,15 +114,15 @@ export const site = {
     },
     {
       time: '16:15',
-      title: 'Talk 1 — AI and the OWASP Top 10',
+      title: 'Talk 1 — Taming the agentic harness',
       description:
-        'Victor Svensson and Åsa Abrahamsson (Knowit Experience) on securing AI through the lens of the OWASP Top 10.',
+        'Andreas Heige (Knowit Experience) on setting up agentic workflows and getting the most out of GitHub Copilot.',
     },
     {
       time: '17:00',
-      title: 'Talk 2 — Taming the agentic harness',
+      title: 'Talk 2 — AI and the OWASP Top 10',
       description:
-        'Andreas Heige (Knowit Experience) on setting up agentic workflows and getting the most out of GitHub Copilot.',
+        'Victor Svensson and Åsa Abrahamsson (Knowit Experience) on securing AI through the lens of the OWASP Top 10.',
     },
     {
       time: '17:45',
